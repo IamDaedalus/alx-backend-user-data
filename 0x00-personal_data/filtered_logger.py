@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" filtered logger module for logging """
 
 import re
 from typing import List

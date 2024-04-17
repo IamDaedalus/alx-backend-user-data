@@ -12,7 +12,7 @@ import os
 app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
-auth = None
+auth = BasicAuth()
 
 
 @app.errorhandler(404)

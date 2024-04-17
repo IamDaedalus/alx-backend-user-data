@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3basic
 """ basic auth module """
 
 import base64 as b64
@@ -45,7 +45,7 @@ class BasicAuth(Auth):
             return None
 
         matching_users = User.search({"email": user_email})
-        if not matching_users:
+        if matching_users is None:
             return None
         for user in matching_users:
             if not user.is_valid_password(user_pwd):

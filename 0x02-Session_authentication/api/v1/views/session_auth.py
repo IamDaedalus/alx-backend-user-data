@@ -23,7 +23,7 @@ def login_authentication():
         return {"error": "no user found for this email"}, 404
 
     for user in users:
-        if user.is_valid_password(password):
+        if user and user.is_valid_password(password):
             from api.v1.app import auth
             session_id = auth.create_session(user.id)
             response = jsonify(user.to_json())
@@ -32,3 +32,13 @@ def login_authentication():
             return response
 
         return {"error": "wrong password"}, 401
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+def logout_procedure():
+    """ logout procedure and implementation """
+    from api.v1.app import auth
+    retval = auth.destroy_session(request)
+    if not retval:
+        abort(404)
+    return {}, 200
